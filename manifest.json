@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Secret Blur",
+    "version": "1.0",
+    "description": "Protects privacy by blurring email addresses on web pages. Hover to reveal.",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "action": {
+        "default_popup": "popup/popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "scripts/content.js"
+            ],
+            "css": [
+                "scripts/styles.css"
+            ],
+            "run_at": "document_start",
+            "all_frames": true,
+            "match_about_blank": true
+        }
+    ]
+}

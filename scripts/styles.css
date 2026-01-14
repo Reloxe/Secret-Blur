@@ -1,0 +1,107 @@
+@keyframes sb-border-pulse {
+    0% {
+        border-color: rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+
+    50% {
+        border-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+    }
+
+    100% {
+        border-color: rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.sb-blurred-email {
+    filter: blur(var(--sb-blur-radius, 5px)) !important;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+    user-select: none;
+    position: relative;
+    display: inline-block;
+}
+
+.sb-email-revealed {
+    filter: blur(0) !important;
+    cursor: text;
+    user-select: text;
+}
+
+.sb-wrapper {
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    animation: sb-border-pulse 2s infinite ease-in-out;
+    padding: 0 2px;
+    margin: 0 1px;
+}
+
+.sb-wrapper.revealed {
+    animation: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.sb-eye-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+    z-index: 9999;
+}
+
+.sb-eye-icon::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 0 2px white);
+}
+
+.sb-wrapper:hover .sb-eye-icon {
+    opacity: 1;
+}
+
+.sb-eye-icon.warning::before {
+    filter: drop-shadow(0 0 2px red) !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23ff0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>');
+}
+
+.sb-reblur-icon {
+    display: none;
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+    vertical-align: middle;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M1 1l22 22"></path><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.sb-reblur-icon:hover {
+    opacity: 1;
+}
+
+.sb-wrapper.revealed .sb-reblur-icon {
+    display: inline-block;
+}
+
+.sb-wrapper.revealed .sb-eye-icon {
+    display: none;
+}
