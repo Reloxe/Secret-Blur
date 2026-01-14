@@ -29,27 +29,24 @@ function init() {
     const observer = new MutationObserver((mutations) => {
         if (!settings.hideEmails && !settings.hideIps) return;
 
-        let shouldScan = false;
+        const nodesToScan = new Set();
+
         mutations.forEach((mutation) => {
-            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                shouldScan = true;
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        nodesToScan.add(node);
+                    } else if (node.nodeType === Node.TEXT_NODE) {
+                        processTextNode(node);
+                    }
+                });
             } else if (mutation.type === 'characterData') {
                 processTextNode(mutation.target);
             }
         });
 
-        if (shouldScan) {
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'childList') {
-                    mutation.addedNodes.forEach((node) => {
-                        if (node.nodeType === Node.ELEMENT_NODE) {
-                            scanAndBlur(node);
-                        } else if (node.nodeType === Node.TEXT_NODE && node.parentElement) {
-                            processTextNode(node);
-                        }
-                    });
-                }
-            });
+        if (nodesToScan.size > 0) {
+            nodesToScan.forEach(node => scanAndBlur(node));
         }
     });
 
@@ -58,10 +55,6 @@ function init() {
         subtree: true,
         characterData: true
     });
-
-    setInterval(() => {
-        scanAndBlur(document.documentElement);
-    }, 100);
 }
 
 function scanAndBlur(rootNode) {
@@ -79,7 +72,8 @@ function scanAndBlur(rootNode) {
             acceptNode: function (node) {
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     if (node.shadowRoot) return NodeFilter.FILTER_ACCEPT;
-                    if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE') {
+                    const tag = node.tagName;
+                    if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || tag === 'TEXTAREA' || tag === 'INPUT') {
                         return NodeFilter.FILTER_REJECT;
                     }
                     return NodeFilter.FILTER_SKIP;
@@ -115,17 +109,30 @@ function processTextNode(textNode) {
 
     const text = textNode.nodeValue;
 
+    // PERF FIX: Skip huge text blocks (likely data, code, or base64)
+    if (text.length > 150) return;
+
+    // Failsafe checks - Don't run Regex if basic chars miss
+    const hasAt = text.includes('@');
+    const hasDot = text.includes('.');
+    const hasColon = text.includes(':');
+
+    if (!hasAt && !hasDot && !hasColon) return;
+
     let pattern = null;
     let cls = '';
 
-    if (settings.hideEmails && EMAIL_REGEX.test(text)) {
+    if (settings.hideEmails && hasAt && EMAIL_REGEX.test(text)) {
         pattern = EMAIL_REGEX;
         cls = 'sb-blurred-email';
     } else if (settings.hideIps) {
-        if (IP_REGEX.test(text)) {
+        // Optimize: Only check IPv4 if dots exist
+        if (hasDot && IP_REGEX.test(text)) {
             pattern = IP_REGEX;
             cls = 'sb-blurred-ip';
-        } else if (IPV6_REGEX.test(text)) {
+        }
+        // Optimize: Only check IPv6 if colons exist
+        else if (hasColon && IPV6_REGEX.test(text)) {
             pattern = IPV6_REGEX;
             cls = 'sb-blurred-ip';
         }

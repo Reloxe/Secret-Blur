@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Secret Blur",
     "version": "1.0",
-    "description": "Protects privacy by blurring email addresses on web pages. Hover to reveal.",
+    "description": "Simple email and IP address masking extension. Protect your privacy!",
     "permissions": [
         "activeTab",
         "scripting",
