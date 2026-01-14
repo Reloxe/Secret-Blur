@@ -17,7 +17,7 @@
 
 ## Installation
 
-1.  Clone or download this repository.
+1.  Clone this repository or [Download ZIP](https://github.com/Reloxe/Secret-Blur/archive/refs/heads/main.zip).
 2.  Open Chrome and go to `chrome://extensions`.
 3.  Enable **Developer Mode** (top right corner).
 4.  Click **Load unpacked**.
@@ -56,7 +56,7 @@ This extension runs locally on your browser. No data is collected or sent to any
 
 ## Kurulum
 
-1.  Bu projeyi indirin veya kopyalayın.
+1.  Bu projeyi kopyalayın veya [ZIP olarak indirin](https://github.com/Reloxe/Secret-Blur/archive/refs/heads/main.zip).
 2.  Chrome tarayıcısında `chrome://extensions` adresine gidin.
 3.  Sağ üst köşedeki **Geliştirici Modu**'nu aktif edin.
 4.  **Paketlenmemiş öğe yükle** butonuna tıklayın.
