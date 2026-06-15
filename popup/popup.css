@@ -1,8 +1,9 @@
 :root {
-    --primary-color: #6C63FF;
-    --bg-color: #1a1a2e;
+    --primary-color: #2196F3;
+    --bg-color: #0a0e27;
     --text-color: #ffffff;
-    --card-bg: #16213e;
+    --card-bg: #111835;
+    --accent-color: #00BCD4;
 }
 
 body {
@@ -28,8 +29,8 @@ body {
 header h1 {
     margin: 0 0 10px 0;
     font-size: 20px;
-    font-weight: 600;
-    background: linear-gradient(90deg, #6C63FF, #FF6584);
+    font-weight: 700;
+    background: linear-gradient(90deg, #2196F3, #00BCD4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -50,6 +51,7 @@ main {
     border-radius: 10px;
     width: 100%;
     box-sizing: border-box;
+    border: 1px solid rgba(33, 150, 243, 0.15);
 }
 
 .label {
@@ -77,7 +79,7 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #1a1f4e;
     transition: .4s;
 }
 
@@ -88,7 +90,7 @@ main {
     width: 20px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: #5a5f8a;
     transition: .4s;
 }
 
@@ -97,6 +99,7 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
+    background-color: #ffffff;
     transform: translateX(22px);
 }
 
@@ -113,7 +116,7 @@ footer {
 }
 
 .brand-link {
-    color: #a0a0a0;
+    color: #4a5090;
     text-decoration: none;
     font-size: 12px;
     transition: color 0.3s;

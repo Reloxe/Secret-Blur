@@ -1,8 +1,9 @@
 {
     "manifest_version": 3,
-    "name": "Secret Blur",
+    "name": "__MSG_extName__",
     "version": "1.0",
-    "description": "Simple email and IP address masking extension. Protect your privacy!",
+    "description": "__MSG_extDesc__",
+    "default_locale": "en",
     "permissions": [
         "activeTab",
         "scripting",
@@ -11,8 +12,12 @@
     "host_permissions": [
         "<all_urls>"
     ],
+    "icons": {
+        "128": "icons/icon128.png"
+    },
     "action": {
-        "default_popup": "popup/popup.html"
+        "default_popup": "popup/popup.html",
+        "default_icon": "icons/icon128.png"
     },
     "content_scripts": [
         {

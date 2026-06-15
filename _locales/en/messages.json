@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "Secret Blur - Auto Email and IP address Masking",
+    "description": "Extension name"
+  },
+  "extDesc": {
+    "message": "Email and IP address masking extension. Protect your privacy!",
+    "description": "Extension description"
+  },
+  "appName": {
+    "message": "Secret Blur",
+    "description": "App title shown in popup header"
+  },
+  "labelEmails": {
+    "message": "Emails",
+    "description": "Label for the emails toggle switch"
+  },
+  "labelIps": {
+    "message": "IP Addresses",
+    "description": "Label for the IP addresses toggle switch"
+  }
+}

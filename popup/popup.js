@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('appTitle').textContent = chrome.i18n.getMessage('appName');
+    document.getElementById('labelEmails').textContent = chrome.i18n.getMessage('labelEmails');
+    document.getElementById('labelIps').textContent = chrome.i18n.getMessage('labelIps');
+
     const toggleEmails = document.getElementById('toggleEmails');
     const toggleIps = document.getElementById('toggleIps');
 
